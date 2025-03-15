@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<h2>SODB</h2>
+<h3>
+    <br>
+    <b>
+        Number of People In Camp:
+        <div id="inCamp"></div>
+    </b>
+    <br>
+    <b>
+        Present Strength in Briefing Room:
+        <div id="inBriefingRoom"></div>
+    </b>
+    <br>
+    <b>
+        Pax Not Present:
+        <div id="absent"></div>
+    </b>
+</h3>
+
+
+<h4 style="color: brown;"><u>DSP</u></h4>
+<h4>The Absent People Are:</h4>
+<table style="max-width:100%" id="DSPtable">
+    
+    <tr>
+        <th>Name</th>
+        <th>Reason</th>
+        <th>Check to Submit</th>
+    </tr>
+    <tr>
+        <td>
+            <input type="text" id="dsp-name">
+        </td>
+        <td>
+            <input type="text" id="dsp-reason">
+        </td>
+        <td>
+            <button type="button" py-click="submit_person_dsp" id="checksubmit">Submit</button>
+        </td>
+        <script type="py" src="./main.py" config="./pyscript.json"></script>
+    </tr>
+
+
+</table>
+
+
+
+
+
+</html>
