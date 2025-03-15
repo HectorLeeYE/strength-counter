@@ -1,54 +1,63 @@
 <!DOCTYPE html>
-<html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Table</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        table { width: 50%; margin: 20px auto; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 10px; text-align: center; }
+        button { padding: 5px 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
 
-<h2>SODB</h2>
-<h3>
-    <br>
-    <b>
-        Number of People In Camp:
-        <div id="inCamp"></div>
-    </b>
-    <br>
-    <b>
-        Present Strength in Briefing Room:
-        <div id="inBriefingRoom"></div>
-    </b>
-    <br>
-    <b>
-        Pax Not Present:
-        <div id="absent"></div>
-    </b>
-</h3>
+    <h2>Dynamic Table</h2>
+    <p>Total Items: <span id="counter">0</span></p>
 
+    <input type="text" id="dataInput" placeholder="Enter data">
+    <button onclick="addRow()">Add</button>
 
-<h4 style="color: brown;"><u>DSP</u></h4>
-<h4>The Absent People Are:</h4>
-<table style="max-width:100%" id="DSPtable">
-    
-    <tr>
-        <th>Name</th>
-        <th>Reason</th>
-        <th>Check to Submit</th>
-    </tr>
-    <tr>
-        <td>
-            <input type="text" id="dsp-name">
-        </td>
-        <td>
-            <input type="text" id="dsp-reason">
-        </td>
-        <td>
-            <button type="button" py-click="submit_person_dsp" id="checksubmit">Submit</button>
-        </td>
-        <script type="py" src="./main.py" config="./pyscript.json"></script>
-    </tr>
+    <table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
 
+    <script>
+        function addRow() {
+            let input = document.getElementById("dataInput");
+            let data = input.value.trim();
+            if (data === "") return;
 
-</table>
+            let tableBody = document.getElementById("tableBody");
+            let row = tableBody.insertRow();
+            
+            let cell1 = row.insertCell(0);
+            cell1.textContent = data;
 
+            let cell2 = row.insertCell(1);
+            let deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "Delete";
+            deleteBtn.onclick = function () {
+                row.remove();
+                updateCounter();
+            };
+            cell2.appendChild(deleteBtn);
 
+            input.value = ""; // Clear input
+            updateCounter();
+        }
 
+        function updateCounter() {
+            document.getElementById("counter").textContent = document.getElementById("tableBody").rows.length;
+        }
+    </script>
 
-
+</body>
 </html>
