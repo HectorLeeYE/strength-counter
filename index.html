@@ -145,8 +145,36 @@
         <tbody id="dhq_tableBody"></tbody>
     </table>
 
+    <p>Total Present In Briefing Room: <span id="totalCount">0</span></p>
+    <p>Total Absent: <span id="totalAbsent">0</span></p>
+    <p>Total Strength: <span id="totalStrength">0</span></p>
+
+    <button id="calculateTotal" onclick="calculateTotal('totalCount', 'totalAbsent','totalStrength')">Calculate!</button>
 
     <script>
+
+        function calculateTotal(totalCount, totalAbsent, totalStrength){
+            //Give me the total Count 
+            let dsp_present_total = Number(document.getElementById("DSP_present_input").value);
+            let dmsp_present_total = Number(document.getElementById("DMSP_present_input").value);
+            let dcs_present_total = Number(document.getElementById("DCS_present_input").value);
+            let dhq_present_total = Number(document.getElementById("DHQ_present_input").value);
+            let total = dsp_present_total + dmsp_present_total + dcs_present_total + dhq_present_total;
+            document.getElementById(totalCount).textContent = total;
+
+            //Give me the totalAbsent
+            let dsp_totalAbs = Number(document.getElementById('dsp_counter').textContent);
+            let dmsp_totalAbs = Number(document.getElementById('dmsp_counter').textContent);
+            let dcs_totalAbs = Number(document.getElementById('dcs_counter').textContent);
+            let dhq_totalAbs = Number(document.getElementById('dhq_counter').textContent);
+            let totalAbs = dsp_totalAbs + dmsp_totalAbs + dcs_totalAbs + dhq_totalAbs;
+            document.getElementById(totalAbsent).textContent = totalAbs;
+
+            //Give me the totalStrength
+            let totalStr = totalAbs + total;
+            document.getElementById(totalStrength).textContent = totalStr;
+        }
+
         function submit(present, total, output_pres, output_tot) {
             // Submit Number of people present and total strength
             document.getElementById(output_pres).textContent = document.getElementById(present).value;
