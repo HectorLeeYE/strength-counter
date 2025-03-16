@@ -1,63 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Table</title>
+    <title>Strength Counter</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        table { width: 50%; margin: 20px auto; border-collapse: collapse; }
-        th, td { border: 1px solid black; padding: 10px; text-align: center; }
-        button { padding: 5px 10px; cursor: pointer; }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
+
 <body>
 
-    <h2>Dynamic Table</h2>
-    <p>Total Items: <span id="counter">0</span></p>
+    <h2>Strength Counter</h2>
 
-    <input type="text" id="dataInput" placeholder="Enter data">
-    <button onclick="addRow()">Add</button>
+    <!-- DSP Section -->
+    <h3><u>DSP</u></h3>
+
+    <p>Number of People Present In Briefing Room <input type="text" id="DSP_present_input"></p>
+    <p>Total Strength <input type="text" id="DSP_total_input"></p>
+    <button onclick="submit('DSP_present_input','DSP_total_input','dsp_present','dsp_total')">Add</button>
+
+    <p>Number of people present: <span id="dsp_present">0</span></p>
+    <p>Total Strength: <span id="dsp_total">0</span></p>
+
+    <p>Total Number of People Missing: <span id="dsp_counter">0</span></p>
+
+    <input type="text" id="dsp_name" placeholder="Enter Name">
+    <input type="text" id="dsp_reason" placeholder="Enter Reason">
+    <button onclick="addRow('dsp_tableBody', 'dsp_name', 'dsp_reason', 'dsp_counter','dsp_present')">Add</button>
 
     <table>
         <thead>
             <tr>
-                <th>Data</th>
-                <th>Action</th>
+                <th>Name</th>
+                <th>Reason</th>
+                <th>Delete</th>
             </tr>
         </thead>
-        <tbody id="tableBody"></tbody>
+        <tbody id="dsp_tableBody"></tbody>
     </table>
 
+    <!-- DMSP Section -->
+    <h3><u>DMSP</u></h3>
+
+    <p>Number of People Present In Briefing Room <input type="text" id="DMSP_present_input"></p>
+    <p>Total Strength <input type="text" id="DMSP_total_input"></p>
+    <button onclick="submit('DMSP_present_input','DMSP_total_input','dmsp_present','dmsp_total')">Add</button>
+
+    <p>Number of people present: <span id="dmsp_present">0</span></p>
+    <p>Total Strength: <span id="dmsp_total">0</span></p>
+
+    <p>Total Number of People Missing: <span id="dmsp_counter">0</span></p>
+
+    <input type="text" id="dmsp_name" placeholder="Enter Name">
+    <input type="text" id="dmsp_reason" placeholder="Enter Reason">
+    <button onclick="addRow('dmsp_tableBody', 'dmsp_name', 'dmsp_reason', 'dmsp_counter', 'dmsp_present')">Add</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Reason</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="dmsp_tableBody"></tbody>
+    </table>
+
+
+    <!-- DCS Section -->
+    <h3><u>DCS</u></h3>
+
+    <p>Number of People Present In Briefing Room <input type="text" id="DCS_present_input"></p>
+    <p>Total Strength <input type="text" id="DCS_total_input"></p>
+    <button onclick="submit('DCS_present_input','DCS_total_input','dcs_present','dcs_total')">Add</button>
+
+    <p>Number of people present: <span id="dcs_present">0</span></p>
+    <p>Total Strength: <span id="dcs_total">0</span></p>
+
+    <p>Total Number of People Missing: <span id="dcs_counter">0</span></p>
+
+    <input type="text" id="dcs_name" placeholder="Enter Name">
+    <input type="text" id="dcs_reason" placeholder="Enter Reason">
+    <button onclick="addRow('dcs_tableBody', 'dcs_name', 'dcs_reason', 'dcs_counter','dcs_present')">Add</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Reason</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="dcs_tableBody"></tbody>
+    </table>
+
+
+    <!-- DHQ Section -->
+    <h3><u>DHQ</u></h3>
+
+    <p>Number of People Present In Briefing Room <input type="text" id="DHQ_present_input"></p>
+    <p>Total Strength <input type="text" id="DHQ_total_input"></p>
+    <button onclick="submit('DHQ_present_input','DHQ_total_input','dhq_present','dhq_total')">Add</button>
+
+    <p>Number of people present: <span id="dhq_present">0</span></p>
+    <p>Total Strength: <span id="dhq_total">0</span></p>
+
+    <p>Total Number of People Missing: <span id="dhq_counter">0</span></p>
+
+    <input type="text" id="dhq_name" placeholder="Enter Name">
+    <input type="text" id="dhq_reason" placeholder="Enter Reason">
+    <button onclick="addRow('dhq_tableBody', 'dhq_name', 'dhq_reason', 'dhq_counter','dhq_present')">Add</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Reason</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="dhq_tableBody"></tbody>
+    </table>
+
+
     <script>
-        function addRow() {
-            let input = document.getElementById("dataInput");
-            let data = input.value.trim();
+        function submit(present, total, output_pres, output_tot) {
+            // Submit Number of people present and total strength
+            document.getElementById(output_pres).textContent = document.getElementById(present).value;
+            document.getElementById(output_tot).textContent = document.getElementById(total).value;
+        }
+
+        function addRow(tableBodyId, nameInputId, reasonInputId, counterId, num_present_counter) {
+            let name = document.getElementById(nameInputId);
+            let data = name.value.trim();
+            let reason = document.getElementById(reasonInputId);
+            let reason_data = reason.value.trim();
+
             if (data === "") return;
 
-            let tableBody = document.getElementById("tableBody");
+            let tableBody = document.getElementById(tableBodyId);
             let row = tableBody.insertRow();
-            
+
             let cell1 = row.insertCell(0);
             cell1.textContent = data;
 
             let cell2 = row.insertCell(1);
+            cell2.textContent = reason_data;
+
+            let cell3 = row.insertCell(2);
             let deleteBtn = document.createElement("button");
             deleteBtn.textContent = "Delete";
             deleteBtn.onclick = function () {
                 row.remove();
-                updateCounter();
+                updateCounter(counterId, tableBodyId, num_present_counter);
             };
-            cell2.appendChild(deleteBtn);
+            cell3.appendChild(deleteBtn);
 
-            input.value = ""; // Clear input
-            updateCounter();
+            name.value = ""; // Clear input fields
+            reason.value = "";
+            updateMissing(counterId, tableBodyId);
         }
 
-        function updateCounter() {
-            document.getElementById("counter").textContent = document.getElementById("tableBody").rows.length;
+        function updateMissing(counterId, tableBodyId) {
+            document.getElementById(counterId).textContent = document.getElementById(tableBodyId).rows.length;
+        }
+
+        function updateCounter(counterId, tableBodyId, num_present_counter) {
+            document.getElementById(counterId).textContent = document.getElementById(tableBodyId).rows.length;
+
+            //Update the number of people present as well when deleted by +1
+            let num_present = Number(document.getElementById(num_present_counter).textContent);
+
+            num_present = num_present + 1;
+
+            document.getElementById(num_present_counter).textContent = num_present;
+
         }
     </script>
 
 </body>
+
 </html>
