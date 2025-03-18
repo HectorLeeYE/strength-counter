@@ -45,11 +45,12 @@
     <p>Number of people present: <span id="dsp_present">0</span></p>
     <p>Total Strength: <span id="dsp_total">0</span></p>
 
-    <p>Total Number of People Missing: <span id="dsp_counter">0</span></p>
+    <p>Total Number of People Missing (Includes Running): <span id="dsp_counter">0</span></p>
+    <p>Total Number of People Running: <span id="dsp_runners">0</span> </p>
 
     <input type="text" id="dsp_name" placeholder="Enter Name">
     <input type="text" id="dsp_reason" placeholder="Enter Reason">
-    <button onclick="addRow('dsp_tableBody', 'dsp_name', 'dsp_reason', 'dsp_counter','dsp_present')">Add</button>
+    <button onclick="addRow('dsp_tableBody', 'dsp_name', 'dsp_reason', 'dsp_counter','dsp_present','dsp_runners')">Add</button>
 
     <table>
         <thead>
@@ -72,11 +73,12 @@
     <p>Number of people present: <span id="dmsp_present">0</span></p>
     <p>Total Strength: <span id="dmsp_total">0</span></p>
 
-    <p>Total Number of People Missing: <span id="dmsp_counter">0</span></p>
+    <p>Total Number of People Missing (Includes Runners): <span id="dmsp_counter">0</span></p>
+    <p>Total Number of People Running: <span id="dmsp_runners">0</span> </p>
 
     <input type="text" id="dmsp_name" placeholder="Enter Name">
     <input type="text" id="dmsp_reason" placeholder="Enter Reason">
-    <button onclick="addRow('dmsp_tableBody', 'dmsp_name', 'dmsp_reason', 'dmsp_counter', 'dmsp_present')">Add</button>
+    <button onclick="addRow('dmsp_tableBody', 'dmsp_name', 'dmsp_reason', 'dmsp_counter', 'dmsp_present', 'dmsp_runners')">Add</button>
 
     <table>
         <thead>
@@ -100,11 +102,12 @@
     <p>Number of people present: <span id="dcs_present">0</span></p>
     <p>Total Strength: <span id="dcs_total">0</span></p>
 
-    <p>Total Number of People Missing: <span id="dcs_counter">0</span></p>
+    <p>Total Number of People Missing (Includes Runners): <span id="dcs_counter">0</span></p>
+    <p>Total Number of People Running: <span id="dcs_runners">0</span> </p>
 
     <input type="text" id="dcs_name" placeholder="Enter Name">
     <input type="text" id="dcs_reason" placeholder="Enter Reason">
-    <button onclick="addRow('dcs_tableBody', 'dcs_name', 'dcs_reason', 'dcs_counter','dcs_present')">Add</button>
+    <button onclick="addRow('dcs_tableBody', 'dcs_name', 'dcs_reason', 'dcs_counter','dcs_present', 'dcs_runners')">Add</button>
 
     <table>
         <thead>
@@ -128,11 +131,12 @@
     <p>Number of people present: <span id="dhq_present">0</span></p>
     <p>Total Strength: <span id="dhq_total">0</span></p>
 
-    <p>Total Number of People Missing: <span id="dhq_counter">0</span></p>
+    <p>Total Number of People Missing (Includes Running): <span id="dhq_counter">0</span></p>
+    <p>Total Number of People Running: <span id="dhq_runners">0</span> </p>
 
     <input type="text" id="dhq_name" placeholder="Enter Name">
     <input type="text" id="dhq_reason" placeholder="Enter Reason">
-    <button onclick="addRow('dhq_tableBody', 'dhq_name', 'dhq_reason', 'dhq_counter','dhq_present')">Add</button>
+    <button onclick="addRow('dhq_tableBody', 'dhq_name', 'dhq_reason', 'dhq_counter','dhq_present','dhq_runners')">Add</button>
 
     <table>
         <thead>
@@ -181,11 +185,20 @@
             document.getElementById(output_tot).textContent = document.getElementById(total).value;
         }
 
-        function addRow(tableBodyId, nameInputId, reasonInputId, counterId, num_present_counter) {
+        function addRow(tableBodyId, nameInputId, reasonInputId, counterId, num_present_counter, runnerCount) {
             let name = document.getElementById(nameInputId);
             let data = name.value.trim();
             let reason = document.getElementById(reasonInputId);
             let reason_data = reason.value.trim();
+            runner_count = Number(document.getElementById(runnerCount).textContent);
+
+            // if reason_data == running, then increase the total count of runners
+            if (reason_data == 'running' || reason_data == 'Running' || reason_data =='run' || reason_data=='Run'){
+                // Increase the total Count of runners
+                runner_count+=1
+            }
+
+            document.getElementById(runnerCount).textContent = runner_count;
 
             if (data === "") return;
 
@@ -225,7 +238,6 @@
             num_present = num_present + 1;
 
             document.getElementById(num_present_counter).textContent = num_present;
-
         }
     </script>
 
