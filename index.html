@@ -150,14 +150,15 @@
     </table>
 
     <p>Total Present In Briefing Room: <span id="totalCount">0</span></p>
-    <p>Total Absent: <span id="totalAbsent">0</span></p>
+    <p>Total Absent (Includes Runners): <span id="totalAbsent">0</span></p>
+    <p>Total Runners: <span id="totalRunners">0</span></p>
     <p>Total Strength: <span id="totalStrength">0</span></p>
 
-    <button id="calculateTotal" onclick="calculateTotal('totalCount', 'totalAbsent','totalStrength')">Calculate!</button>
+    <button id="calculateTotal" onclick="calculateTotal('totalCount', 'totalAbsent','totalStrength', 'totalRunners')">Calculate!</button>
 
     <script>
 
-        function calculateTotal(totalCount, totalAbsent, totalStrength){
+        function calculateTotal(totalCount, totalAbsent, totalStrength, totalRunners){
             //Give me the total Count 
             let dsp_present_total = Number(document.getElementById("DSP_present_input").value);
             let dmsp_present_total = Number(document.getElementById("DMSP_present_input").value);
@@ -177,6 +178,15 @@
             //Give me the totalStrength
             let totalStr = totalAbs + total;
             document.getElementById(totalStrength).textContent = totalStr;
+
+            // Give me the totalRunners
+            let dsp_totalRunners = Number(document.getElementById('dsp_runners').textContent);
+            let dmsp_totalRunners = Number(document.getElementById('dmsp_runners').textContent);
+            let dcs_totalRunners = Number(document.getElementById('dcs_runners').textContent);
+            let dhq_totalRunners = Number(document.getElementById('dhq_runners').textContent);
+            
+            let total_runners = dsp_totalRunners + dmsp_totalRunners + dcs_totalRunners + dhq_totalRunners;
+            document.getElementById(totalRunners).textContent = total_runners;
         }
 
         function submit(present, total, output_pres, output_tot) {
@@ -216,7 +226,7 @@
             deleteBtn.textContent = "Delete";
             deleteBtn.onclick = function () {
                 row.remove();
-                updateCounter(counterId, tableBodyId, num_present_counter);
+                updateCounter(counterId, tableBodyId, num_present_counter, runnerCount);
             };
             cell3.appendChild(deleteBtn);
 
@@ -229,15 +239,18 @@
             document.getElementById(counterId).textContent = document.getElementById(tableBodyId).rows.length;
         }
 
-        function updateCounter(counterId, tableBodyId, num_present_counter) {
+        function updateCounter(counterId, tableBodyId, num_present_counter, runnerCount) {
             document.getElementById(counterId).textContent = document.getElementById(tableBodyId).rows.length;
+            num_runners = Number(document.getElementById(runnerCount).textContent);
 
             //Update the number of people present as well when deleted by +1
             let num_present = Number(document.getElementById(num_present_counter).textContent);
 
             num_present = num_present + 1;
+            num_runners = num_runners - 1;
 
             document.getElementById(num_present_counter).textContent = num_present;
+            document.getElementById(runnerCount).textContent = num_runners;
         }
     </script>
 
