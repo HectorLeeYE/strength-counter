@@ -153,7 +153,22 @@
     <button id="calculateTotal"
         onclick="calculateTotal('totalCount', 'totalAbsent','totalStrength', )">Calculate!</button>
 
+    <h4>Submit Whatsapp Strength</h4>
+    <p>Total Strength (Includes those NOT in camp): <span id="total_not_in_camp">0</span></p>
+    <p>Total Present In Camp: <span id="total_in_camp">0</span></p>
+
+    <button id="text_submit"  onclick="calculateWhatsappStrength('total_not_in_camp','total_in_camp')">Submit Strength</button>
+
+
     <script>
+
+        function calculateWhatsappStrength(total_not_in_camp, total_in_camp){
+            // Give me the total strength and total present in camp, complete with reason 
+            // Assume the entered format will be similar to example.txt
+            window.location.href="/whatsapp_strength.html";
+        }
+
+
 
         function calculateTotal(totalCount, totalAbsent, totalStrength) {
             //Give me the total Count 

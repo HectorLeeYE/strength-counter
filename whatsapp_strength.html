@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whatsapp Strength Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<h1>Whatsapp Strength</h1>
+
+<body>
+
+    <p>Submit your Strength in the text field below</p>
+    <p>TODO: Make sure it follows the below criteria:</p>
+
+
+
+    <p>Submit Strength Below: </p><br>
+    <textarea id="text_strength" rows="6" cols="50" placeholder="Paste your text here..."></textarea><br>
+    <button onclick="submitStrength('text_strength')">Submit Whatsapp Strength</button>
+
+
+    <script>
+        function submitStrength(text_strength){
+            //Take input and return the total and present strength
+            let text = document.getElementById(text_strength).value;
+            text_arr = text.split('\n');
+
+            department_and_date = text_arr[0];
+
+        }
+    </script>
+
+</body>
+
+</html>
